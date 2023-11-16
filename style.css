@@ -1,0 +1,43 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  border-width: 0;
+}
+
+@media (max-width: 790px) {
+  html {
+    --spacing: 1.5rem;
+  }
+}
+
+body {
+  width: 100vw;
+  height: 100dvh;
+  background-color: black;
+  margin: auto;
+  display: flex;
+  font-family: "Inter", sans-serif;
+  overflow: hidden;
+}
+
+.canvas-container {
+  width: 100vw;
+  height: 100dvh;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+#display-canvas:hover {
+  cursor: grab;
+}
+
+#display-canvas:active {
+  cursor: grabbing;
+}
+
+#display-canvas:focus-visible {
+  outline: none;
+}
