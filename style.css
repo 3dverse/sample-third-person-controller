@@ -1,8 +1,9 @@
-*,
+*, 
 ::after,
-::before {
+::before{
   box-sizing: border-box;
   border-width: 0;
+  color: white;
 }
 
 @media (max-width: 790px) {
@@ -21,6 +22,36 @@ body {
   overflow: hidden;
 }
 
+.cta {
+  background:none;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 0.75rem 1.5rem;
+  margin: 0 1rem;
+  cursor: pointer;
+}
+
+.cta:hover {
+  color: black;
+  background-color: rgb(255, 200, 0);
+  border-color: rgb(255, 200, 0);
+}
+
+#crosshair {
+  z-index:1;
+  position:absolute;
+  top:50%;
+  left:50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(0, 0, 0, 0.8);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/*------------------------------------------------*/
+/*---------            CANVAS            ---------*/
+/*------------------------------------------------*/
 .canvas-container {
   width: 100vw;
   height: 100dvh;
@@ -40,4 +71,90 @@ body {
 
 #display-canvas:focus-visible {
   outline: none;
+}
+
+/*------------------------------------------------*/
+/*---------            MODALS            ---------*/
+/*------------------------------------------------*/
+
+.modal-container {
+  visibility:hidden;
+  z-index:2;
+  position:absolute;
+  display:flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  height:100%;
+  background-color: rgb(14,21,31,0.75);
+  color: white;
+
+  & h2 {
+    margin-top: 0;
+    text-align: center;
+  }
+
+  & .cta-container {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+  }
+}
+
+.modal-container.active {
+  visibility:visible;
+}
+
+
+#settings-modal, #disconnected-modal, #inactivity-modal {
+  background-color: rgb(14,21,31);
+  box-shadow: 0 0 5px rgba(4, 4, 6, 0.8);
+  border-radius: 15px;
+  padding: 2rem;
+}
+
+#settings-modal {
+  position:relative;
+
+  & ul#controls {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  
+    & li {
+      margin: 0.5rem 0;
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  & #close-settings {
+    position:absolute;
+    top:0;
+    right: 0;
+    background: none;
+    cursor: pointer;
+    padding:1rem;
+  }
+}
+
+#disconnected-modal p{
+  text-align: center;
+}
+
+#sensitivity-slider {
+  padding: 0.5rem 0;
+}
+
+.action-keys {
+  color:white;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  width:50%;
+  height:100%;
+  text-align: center;
 }
