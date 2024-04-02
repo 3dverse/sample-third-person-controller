@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta content="width=device-width,initial-scale=1.0" name="viewport" />
@@ -20,10 +20,56 @@
       ></canvas>
     </div>
 
+    <div class="modal-container">
+      <!-- SETTINGS POPUP -->
+      <div id="settings-modal">
+        <button id="close-settings" type="button">X</button>
+        <h2>Settings</h2>
+        <ul id="controls">
+          <li>
+            <label for="sensitivity-slider">Mouse Sensitivity :</label>
+            <input type="range" min="0" max="100" value="30" id="sensitivity-slider">
+          </li>
+          <li><p>Look Around</p><span class="action-keys" data-action="LOOK_AROUND">NONE</span></li>
+          <li><p>Move Forward :</p><span class="action-keys" data-action="MOVE_FORWARD">NONE</span></li>        
+          <li><p>Move Backward :</p><span class="action-keys" data-action="MOVE_BACKWARD">NONE</span></li>
+          <li><p>Move Right :</p><span class="action-keys" data-action="MOVE_RIGHT">NONE</span></li>
+          <li><p>Move Left :</p><span class="action-keys" data-action="MOVE_LEFT">NONE</span></li>
+          <li><p>Jump :</p><span class="action-keys" data-action="JUMP">NONE</span></li>
+          <li><p>Sprint :</p><span class="action-keys" data-action="SPRINT">NONE</span></li>
+          <li><p>Dance :</p><span class="action-keys" data-action="DANCE">NONE</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="modal-container">
+      <!-- INACTIVITY POPUP -->
+      <div id="inactivity-modal">
+        <h2>Inactivity Alert</h2>
+        <p>You are inactive since five minutes, you will soon be disconnected.</p>
+        <div class="cta-container">
+          <button id="resume" class="cta" type="button">Resume</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-container">
+      <!-- DISCONNECTION POPUP -->
+      <div id="disconnected-modal">
+        <h2>Disconnected</h2>
+        <p>Connection to the server has been lost.</p>
+        <div class="cta-container">
+          <button id="reload-session" class="cta" type="button">Reload</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="crosshair"></div>
+
     <!-- SDK 3DVERSE -->
     <script src="https://cdn.3dverse.com/legacy/sdk/stable/SDK3DVerse.js"></script>
 
     <!-- APP ENTRYPOINT -->
-    <script src="./main.js" type="module"></script>
+    <script src="./scripts/main.js" type="module"></script>
   </body>
 </html>
