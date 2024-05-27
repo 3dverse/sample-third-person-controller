@@ -127,8 +127,8 @@ function detectGamepad(characterController) {
 //------------------------------------------------------------------------------
 async function detectGamepadActions(characterController) {
     let gamepads;
-    while(device !== 'gamepad')
-    {
+    const interval = setInterval(() => {
+        if(device === 'gamepad') clearInterval(interval);
         gamepads = navigator.getGamepads();
         for (const gamepad of gamepads){
             if(!gamepad) continue;
@@ -137,12 +137,12 @@ async function detectGamepadActions(characterController) {
                 {
                     device = 'gamepad';
                     adjustDeviceSensitivity(characterController);
+                    clearInterval(interval)
                     return;
                 }
             }
         }
-        await new Promise(resolve => setTimeout(resolve, 100));
-    }
+    }, 100);
 }
 
 //------------------------------------------------------------------------------
