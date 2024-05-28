@@ -53,7 +53,7 @@ export function adjustDeviceSensitivity(characterController) {
     // mouse and ~x.0 for gamepad within the current asset script for character 
     // controller camera management.
     let newSensitivity;
-    if(device ===  "gamepad"){
+    if(device ===  "gamepad" || device === "keyboard"){
         newSensitivity = sensitivitySetting / 5;
     } else { //if(device === "mouse"){
         newSensitivity = sensitivitySetting / 100;
@@ -97,6 +97,7 @@ async function getLayoutBasedActionKey(physicalActionKey) {
 export function initDeviceDetection(characterController) {
     detectMouse(characterController);
     detectGamepad(characterController);
+    detectArrowKeys(characterController);
 }
 
 //------------------------------------------------------------------------------
@@ -126,8 +127,8 @@ function detectGamepad(characterController) {
 //------------------------------------------------------------------------------
 async function detectGamepadActions(characterController) {
     let gamepads;
-    while(device !== 'gamepad')
-    {
+    const interval = setInterval(() => {
+        if(device === 'gamepad') clearInterval(interval);
         gamepads = navigator.getGamepads();
         for (const gamepad of gamepads){
             if(!gamepad) continue;
@@ -136,12 +137,12 @@ async function detectGamepadActions(characterController) {
                 {
                     device = 'gamepad';
                     adjustDeviceSensitivity(characterController);
+                    clearInterval(interval)
                     return;
                 }
             }
         }
-        await new Promise(resolve => setTimeout(resolve, 100));
-    }
+    }, 100);
 }
 
 //------------------------------------------------------------------------------
@@ -156,6 +157,20 @@ function detectMouse(characterController) {
             adjustDeviceSensitivity(characterController);
             if(getGamepadsCount() > 0){
                 detectGamepadActions(characterController);
+            }
+        }
+    );
+}
+
+//------------------------------------------------------------------------------
+function detectArrowKeys(characterController) {
+    window.addEventListener(
+        'keydown',
+        (event) => {
+            if (device === 'keyboard') return;
+            if(event.key === "ArrowLeft" || event.key === "ArrowRight"){
+                device = 'keyboard';
+                adjustDeviceSensitivity(characterController);
             }
         }
     );
